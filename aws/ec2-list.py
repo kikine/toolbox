@@ -2,9 +2,9 @@
 
 import boto3
 
-ec2 = boto3.client('ec2')
+ec2 = boto3.resource('ec2')
 
-response = ec2.describe_instances(
+instances = ec2.instances.filter(
     Filters=[
         {
             'Name': 'tag:Name',
@@ -21,7 +21,6 @@ response = ec2.describe_instances(
     ]
 )
 
-for reserv in response['Reservations']:
-    print(reserv['Instances'][0]['InstanceId'])
-
+for instance in instances:
+    print(instance.id)
 
