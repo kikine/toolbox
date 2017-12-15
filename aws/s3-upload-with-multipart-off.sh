@@ -1,7 +1,7 @@
 #!/bin/bash
 
-S3_BUCKET="BUCKET"
-S3_DIR="DIR/SUBDIR"
+S3_BUCKET="bucket"
+S3_DIR="your-dir"
 LOCAL_DIR="/Users/shuai/data"
 
 upload()

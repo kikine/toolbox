@@ -5,6 +5,7 @@ Useful little tools
 - **ec2-create.sh** - create ec2 instance
 - **ec2-list.py** - list ec2 by tag prefix and running state
 - **s3-upload-with-multipart-off.sh** - s3 put object with multipart off (`aws s3 cp` makes it on by default)
+- **s3-cp-to-s3.py** - copy a s3 dir recursively to another s3 dir
 
 > To run shell scripts above, you need `awscli` installed and configured:
 > ```
