@@ -29,7 +29,8 @@ function create()
         --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$name},{Key=Group,Value=$group},{Key=Owner,Value=shuaicj}]" \
                              "ResourceType=volume,Tags=[{Key=Name,Value=$name},{Key=Group,Value=$group},{Key=Owner,Value=shuaicj}]" \
         --security-group-ids sg-ffffffff \
-        --key-name your-key-name
+        --key-name your-key-name \
+        "$@"
 }
 
 function batchCreate()
@@ -67,6 +68,10 @@ function batchCreate()
 }
 
 create --name shuaicj-test-single --group shuaicj-test --ec2 t2.micro --ebs 50 --ip 10.10.10.10
+
+create --name shuaicj-test-single --group shuaicj-test --ec2 t2.micro --ebs 50 --ip 10.10.10.10 --user-data "#!/bin/bash
+bash /home/shuaicj/init_ec2.sh
+"
 
 batchCreate \
     --name-prefix shuaicj-test-batch \
