@@ -2,7 +2,7 @@
 # Calculate the md5 for the whole dir content recursively.
 # The result is reproducible both on MacOS and Linux.
 
-set -e
+set -eo pipefail
 
 if [[ $# -eq 0 ]]; then
     echo "Usage: ./reproducible-dir-md5.sh [DIR]"
@@ -10,6 +10,7 @@ if [[ $# -eq 0 ]]; then
 fi
 
 dir="$1"
+pwd_dir="$(pwd)"
 
 if [[ ! -d "$dir" ]]; then
     echo "dir not exists! $dir"
@@ -28,4 +29,6 @@ else
     echo "Unsupported OS!"
     exit 1
 fi
+
+cd "$pwd_dir"
 
