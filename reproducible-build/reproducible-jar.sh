@@ -30,18 +30,13 @@ find ./META-INF/maven -name "pom.properties" | xargs rm
 # modify MANIFEST.MF, because it contains lines that are unreproducible
 mf="./META-INF/MANIFEST.MF"
 cat "$mf" \
-    | grep "\S" \
     | grep -v "^Implementation-Version:" \
-    | grep -v "^Implementation-URL:" \
     | grep -v "^Built-By:" \
     | grep -v "^Created-By:" \
     | grep -v "^Build-Jdk:" \
-    | grep -v "^[[:space:]]" \
-    | LC_ALL=C sort \
     | tr -d $'\r' \
     > "${mf}.tmp"
 mv -f "${mf}.tmp" "$mf"
-echo >> "$mf" # empty line at the end
 
 # list files and sort it in a fixed order
 wont_compress_dir="./BOOT-INF/lib"
