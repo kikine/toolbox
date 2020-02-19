@@ -24,8 +24,13 @@ unzip -q "$input_jar" -d "$zip_dir"
 
 cd "$zip_dir"
 
-# rm pom.properties, because it contains lines that are unreproducible
-find ./META-INF/maven -name "pom.properties" | xargs rm
+# modify pom.properties, because it contains lines that are unreproducible
+prop="$(find ./META-INF/maven -name 'pom.properties')"
+cat "$prop" \
+    | grep -v "^#" \
+    | tr -d $'\r' \
+    > "${prop}.tmp"
+mv -f "${prop}.tmp" "$prop"
 
 # modify MANIFEST.MF, because it contains lines that are unreproducible
 mf="./META-INF/MANIFEST.MF"
