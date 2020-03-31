@@ -22,9 +22,9 @@ cd "$dir"
 os="$(uname -s)"
 
 if [[ "$os" = "Darwin" ]]; then
-    find . -type f -exec md5 {} \; | LC_ALL=C sort -k 2 | md5
+    find . \( -type f -o -type l \) -exec md5 {} \; | LC_ALL=C sort -k 2 | md5
 elif [[ "$os" = "Linux" ]]; then
-    find . -type f -exec md5sum --tag {} \; | LC_ALL=C sort -k 2 | md5sum | awk '{ print $1 }'
+    find . \( -type f -o -type l \) -exec md5sum --tag {} \; | LC_ALL=C sort -k 2 | md5sum | awk '{ print $1 }'
 else
     echo "Unsupported OS!"
     exit 1
